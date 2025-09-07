@@ -1,0 +1,1 @@
+API-only; PostGIS handles distance/buffer/area. See README for endpoints.
