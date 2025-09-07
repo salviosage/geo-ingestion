@@ -1,0 +1,29 @@
+# requirements-dev.txt
+# Development and testing dependencies
+
+# Include base requirements
+-r requirements.txt
+
+# Testing
+pytest-cov==5.0.0
+pytest-asyncio==0.23.5
+pytest-ordering==0.6
+faker==24.0.0
+
+# Code Quality
+black==24.2.0
+isort==5.13.2
+flake8==7.0.0
+mypy==1.8.0
+pylint==3.0.3
+
+# Debugging
+ipython==8.21.0
+ipdb==0.13.13
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.5.9
+
+# Performance Testing
+locust==2.22.0
