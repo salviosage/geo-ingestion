@@ -1,4 +1,3 @@
-# Makefile
 .PHONY: help build up down test clean migrate logs shell
 
 help:
