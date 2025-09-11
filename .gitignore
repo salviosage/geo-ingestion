@@ -58,3 +58,6 @@ Thumbs.db
 data/
 tmp/
 config.local.yml
+
+.venv/
+.envrc
