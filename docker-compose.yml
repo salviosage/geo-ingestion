@@ -1,26 +1,26 @@
+version: "3.9"
 services:
   db:
     image: postgis/postgis:16-3.4
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: appdb
+    env_file:
+      - .env
     ports:
       - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d appdb"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
+      interval: 2s
+      timeout: 5s
+      retries: 30
 
   api:
     build:
       context: .
-      dockerfile: ./app/Dockerfile
-    environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/appdb
+      dockerfile: app/Dockerfile
     depends_on:
       db:
         condition: service_healthy
+    env_file:
+      - .env
     ports:
       - "8000:8000"
+    command: ["/bin/bash","-lc","/app/app/start.sh"]
