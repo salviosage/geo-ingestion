@@ -23,6 +23,15 @@ def process_feature(feature_id: str, db: Session = Depends(get_db)):
         raise HTTPException(404, "Not found")
     return {"processed": True}
 
+@router.get("/features/near", response_model=list[dict])
+def features_near(
+    lat: float = Query(..., ge=-90, le=90),
+    lon: float = Query(..., ge=-180, le=180),
+    radius_m: int = Query(1000, gt=0),
+    db: Session = Depends(get_db),
+):
+    return service.features_near(db, lat, lon, radius_m)
+
 @router.get("/features/{feature_id}", response_model=dict)
 def get_feature(feature_id: str, db: Session = Depends(get_db)):
     row = service.get_feature(db, feature_id)
@@ -30,9 +39,3 @@ def get_feature(feature_id: str, db: Session = Depends(get_db)):
         raise HTTPException(404, "Not found")
     return row
 
-@router.get("/features/near", response_model=list[dict])
-def features_near(lat: float = Query(..., ge=-90, le=90),
-                  lon: float = Query(..., ge=-180, le=180),
-                  radius_m: int = Query(1000, gt=0),
-                  db: Session = Depends(get_db)):
-    return service.features_near(db, lat, lon, radius_m)
