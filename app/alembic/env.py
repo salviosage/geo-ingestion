@@ -1,5 +1,4 @@
 from __future__ import annotations
-from app.db import Base  # metadata
 import os
 import sys
 from logging.config import fileConfig
@@ -10,7 +9,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(
     os.path.dirname(__file__), "..", ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
-
+from app.db import Base  # metadata
 import app.models  # noqa
 
 config = context.config
